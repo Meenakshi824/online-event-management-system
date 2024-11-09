@@ -1,0 +1,51 @@
+package com.example.eventmanagement.dao;
+
+import com.example.eventmanagement.model.Event;
+import com.example.eventmanagement.utils.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EventDAO {
+    public void addEvent(Event event) {
+        String query = "INSERT INTO Event (name, date, location, description) VALUES (?, ?, ?, ?)";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, event.getName());
+            preparedStatement.setDate(2, new java.sql.Date(event.getDate().getTime()));
+            preparedStatement.setString(3, event.getLocation());
+            preparedStatement.setString(4, event.getDescription());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Event> getAllEvents() {
+        List<Event> events = new ArrayList<>();
+        String query = "SELECT * FROM Event";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Event event = new Event();
+                event.setEventId(resultSet.getInt("event_id"));
+                event.setName(resultSet.getString("name"));
+                event.setDate(resultSet.getDate("date"));
+                event.setLocation(resultSet.getString("location"));
+                event.setDescription(resultSet.getString("description"));
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
+    }
+}
