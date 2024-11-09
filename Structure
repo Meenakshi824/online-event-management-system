@@ -1,0 +1,19 @@
+OnlineEventManagementSystem/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── com.example.eventmanagement/
+│   │   │   │   ├── model/
+│   │   │   │   ├── dao/
+│   │   │   │   ├── controller/
+│   │   │   │   ├── service/
+│   │   │   │   └── utils/
+│   │   └── resources/
+│   └── webapp/
+│       ├── WEB-INF/
+│       │   └── web.xml
+│       ├── index.jsp
+│       └── events.jsp
+├── pom.xml (if using Maven)
+└── build.gradle (if using Gradle)
