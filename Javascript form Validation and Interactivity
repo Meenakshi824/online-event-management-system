@@ -1,0 +1,79 @@
+// Example user data
+const users = [
+    { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
+    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Event Organizer" }
+];
+
+// Populate table dynamically
+function loadUsers() {
+    const userTable = document.getElementById("userTable");
+    userTable.innerHTML = "";
+    users.forEach((user, index) => {
+        userTable.innerHTML += `
+            <tr>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.role}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editUser(${index})">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteUser(${index})">Delete</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+// Form Validation
+function validateForm() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const role = document.getElementById("role").value;
+
+    if (!name || !email || !role) {
+        alert("All fields are required!");
+        return false;
+    }
+
+    if (!email.includes("@")) {
+        alert("Invalid email address!");
+        return false;
+    }
+
+    addUser(name, email, role);
+    return false;
+}
+
+// Add User
+function addUser(name, email, role) {
+    const newUser = {
+        id: users.length + 1,
+        name,
+        email,
+        role
+    };
+    users.push(newUser);
+    loadUsers();
+    alert("User added successfully!");
+    document.getElementById("addUserForm").reset();
+    const modal = document.querySelector("#addUserModal .btn-close");
+    modal.click();
+}
+
+// Edit User (Stub)
+function editUser(index) {
+    alert(`Edit feature for user ${users[index].name} coming soon!`);
+}
+
+// Delete User
+function deleteUser(index) {
+    if (confirm(`Are you sure you want to delete ${users[index].name}?`)) {
+        users.splice(index, 1);
+        loadUsers();
+    }
+}
+
+// Initialize
+document.addEventListener("DOMContentLoaded", () => {
+    loadUsers();
+});
