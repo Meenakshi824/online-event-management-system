@@ -13,12 +13,12 @@ Getting Started
 Usage
 License
 
-#features
+# features
 1. user login funcality
 2. User registration link
 3. Simple and clean user interface
 
-#Technology Used
+# Technology Used
 - java 17
 - Maven
 - MySQL
