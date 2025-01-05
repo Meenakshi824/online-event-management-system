@@ -30,3 +30,41 @@ to get a local copy up and running follow these simple steps
 1. java JDK 17
 2. Maven
 3. MySQL Server
+
+# Documentation
+# Event Management System
+
+## Overview
+An online system for managing events, where admins, organizers, and attendees have specific functionalities.
+
+### Features
+- Admin: User management, event approvals.
+- Organizer: Event creation, ticketing, communication.
+- Attendee: Registration, ticket purchase, updates.
+
+### Technologies Used
+- **Backend:** Spring Boot, Hibernate
+- **Frontend:** React (optional for GUI)
+- **Database:** MySQL
+- **Testing:** JUnit, Mockito
+- **Other Tools:** Swagger, Postman
+
+### How to Run
+1. Clone the repository.
+2. Configure `application.properties` with database credentials.
+3. Run the application with `mvn spring-boot:run`.
+
+### Future Enhancements
+- Payment gateway integration.
+- Real-time event updates.
+- Advanced analytics.
+
+## API Endpoints
+- `GET /api/events`: Fetch all events.
+- `POST /api/events`: Create an event.
+- `PUT /api/events/{id}`: Update an event.
+- `DELETE /api/events/{id}`: Delete an event.
+
+## Test Coverage
+Test cases are implemented for both the Service and DAO layers with 85%+ coverage.
+
