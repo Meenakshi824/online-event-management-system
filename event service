@@ -1,0 +1,32 @@
+package com.eventmanagement.service;
+
+import com.eventmanagement.dao.EventDAO;
+import com.eventmanagement.model.Event;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class EventService {
+
+    @Autowired
+    private EventDAO eventDAO;
+
+    public List<Event> getAllEvents() {
+        return eventDAO.findAll();
+    }
+
+    public Optional<Event> getEventById(Long id) {
+        return eventDAO.findById(id);
+    }
+
+    public Event createEvent(Event event) {
+        return eventDAO.save(event);
+    }
+
+    public void deleteEvent(Long id) {
+        eventDAO.deleteById(id);
+    }
+}
