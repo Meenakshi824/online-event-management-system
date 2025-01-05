@@ -1,0 +1,81 @@
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/EventServlet")
+public class EventServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Handle form submission or other POST requests
+    }
+}
+
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+    <servlet>
+        <servlet-name>EventServlet</servlet-name>
+        <servlet-class>com.yourpackage.EventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EventServlet</servlet-name>
+        <url-pattern>/EventServlet</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/EventServlet")
+public class EventServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    // Simulating a database with an in-memory list of events
+    private List<Event> events = new ArrayList<>();
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Fetching event details
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        out.println("<html><body>");
+        out.println("<h2>Event Details</h2>");
+        for (Event event : events) {
+            out.println("<p>Event Name: " + event.getName() + "<br>");
+            out.println("Event Date: " + event.getDate() + "<br>");
+            out.println("Event Description: " + event.getDescription() + "</p>");
+        }
+        out.println("</body></html>");
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Creating a new event
+        String name = request.getParameter("name");
+        String date = request.getParameter("date");
+        String description = request.getParameter("description");
+
+        Event newEvent = new Event(name, date, description);
+        events.add(newEvent);
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<h2>Event Created Successfully</h2>");
+        out.println("<p>Event Name: " + name + "<br>");
+        out.println("Event Date: " + date + "<br>");
+        out.println("Event Description: " + description + "</p>");
+        out.println("</body></html>");
+    }
+}
+      
