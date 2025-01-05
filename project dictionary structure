@@ -1,0 +1,24 @@
+event-management-system/
+├── src/
+│   ├── main/
+│   │   ├── java/com/eventmanagement/
+│   │   │   ├── controller/
+│   │   │   │   └── EventController.java
+│   │   │   ├── service/
+│   │   │   │   └── EventService.java
+│   │   │   ├── repository/
+│   │   │   │   └── EventRepository.java
+│   │   │   ├── model/
+│   │   │   │   └── Event.java
+│   │   │   ├── util/
+│   │   │   │   └── QRCodeGenerator.java
+│   │   │   └── EventManagementSystemApplication.java
+│   ├── test/
+│   │   ├── java/com/eventmanagement/
+│   │   │   ├── service/
+│   │   │   │   └── EventServiceTest.java
+│   │   │   ├── repository/
+│   │   │   │   └── EventRepositoryTest.java
+├── pom.xml
+├── README.md
+└── application.properties
