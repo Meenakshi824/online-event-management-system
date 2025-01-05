@@ -1,0 +1,15 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User List</title>
+</head>
+<body>
+    <h2>Registered Users</h2>
+    <ul>
+        <c:forEach var="user" items="${users}">
+            <li><a href="UserServlet?username=${user.username}">${user.username}</a></li>
+        </c:forEach>
+    </ul>
+</body>
+</html>
