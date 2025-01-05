@@ -1,0 +1,47 @@
+package com.eventmanagement.dao;
+
+import com.eventmanagement.model.Event;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@DataJpaTest
+public class EventDAOTest {
+
+    @Autowired
+    private EventDAO eventDAO;
+
+    @Test
+    public void testCreateEvent() {
+        Event event = new Event();
+        event.setId(1L);
+        event.setTitle("Tech Conference");
+        event.setDescription("An annual tech conference.");
+        event.setDate("2025-01-10");
+
+        Event savedEvent = eventDAO.save(event);
+
+        assertEquals(event.getId(), savedEvent.getId());
+        assertEquals(event.getTitle(), savedEvent.getTitle());
+    }
+
+    @Test
+    public void testFindEventById() {
+        Event event = new Event();
+        event.setId(2L);
+        event.setTitle("Music Festival");
+        event.setDescription("A grand music festival.");
+        event.setDate("2025-03-15");
+
+        eventDAO.save(event);
+
+        Optional<Event> retrievedEvent = eventDAO.findById(2L);
+        assertTrue(retrievedEvent.isPresent());
+        assertEquals(event.getTitle(), retrievedEvent.get().getTitle());
+    }
+}
