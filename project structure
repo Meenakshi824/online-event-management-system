@@ -1,0 +1,14 @@
+src/main/java/com/eventmanagement
+    ├── dao
+    │   └── EventDAO.java
+    ├── service
+    │   └── EventService.java
+    ├── model
+    │   └── Event.java
+    └── controller
+        └── EventController.java
+src/test/java/com/eventmanagement
+    ├── dao
+    │   └── EventDAOTest.java
+    └── service
+        └── EventServiceTest.java
