@@ -1,0 +1,62 @@
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/UserServlet")
+public class UserServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    // Simulating a database with an in-memory list of users
+    private List<User> users = new ArrayList<>();
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Fetching user profile details
+        String username = request.getParameter("username");
+        User user = getUserByUsername(username);
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        out.println("<html><body>");
+        if (user != null) {
+            out.println("<h2>User Profile</h2>");
+            out.println("<p>Username: " + user.getUsername() + "<br>");
+            out.println("Full Name: " + user.getFullName() + "<br>");
+            out.println("Email: " + user.getEmail() + "</p>");
+        } else {
+            out.println("<p>User not found!</p>");
+        }
+        out.println("</body></html>");
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Registering a new user
+        String username = request.getParameter("username");
+        String fullName = request.getParameter("fullName");
+        String email = request.getParameter("email");
+
+        User newUser = new User(username, fullName, email);
+        users.add(newUser);
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<h2>User Registered Successfully</h2>");
+        out.println("<p>Username: " + username + "<br>");
+        out.println("Full Name: " + fullName + "<br>");
+        out.println("Email: " + email + "</p>");
+        out.println("</body></html>");
+    }
+
+    private User getUserByUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
+}
