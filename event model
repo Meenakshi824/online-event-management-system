@@ -1,0 +1,16 @@
+package com.eventmanagement.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Event {
+    @Id
+    private Long id;
+    private String title;
+    private String description;
+    private String date;
+
+    // Getters and setters
+    // Constructors
+}
